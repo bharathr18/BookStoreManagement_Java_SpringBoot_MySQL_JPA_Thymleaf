@@ -11,6 +11,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Book Store</title>
+    <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -57,7 +58,10 @@
             <td th:text="${b.name}"></td>
             <td th:text="${b.author}"></td>
             <td th:text="${b.price}"></td>
-            <td><a class="btn btn-secondary btn-sm" th:href="@{/mylist/{id}{id=${b.id}}}">Add To MyBook</a></td>
+            <td><a class="btn btn-secondary btn-sm" th:href="@{/mylist/{id}(id=${b.id})}">Add To MyBook</a>
+                <a style="color:blue" th:href="@{/editBook/{id} (id=${b.id})}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a style="color:red"><i class="fa-solid fa-trash"></i></a>
+            </td>
         </tr>
 
         </tbody>

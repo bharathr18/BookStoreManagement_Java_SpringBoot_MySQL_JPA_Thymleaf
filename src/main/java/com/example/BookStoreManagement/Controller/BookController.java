@@ -7,6 +7,7 @@ import com.example.BookStoreManagement.Service.BookService;
 import com.example.BookStoreManagement.Service.MyBookListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,9 +19,10 @@ public class BookController {
 
     @Autowired
     BookService bookService;
-
     @Autowired
     MyBookListService myBookListService;
+
+
     @GetMapping("/")
     public String home()
     {
@@ -52,9 +54,11 @@ public class BookController {
     }
 
     @GetMapping("/my_books")
-    public String getMyBooks()
+    public String getMyBooks(Model model)
     {
-        return "my_books";
+        List<MyBookList> list = myBookListService.getAllMyBooks();
+        model.addAttribute("book",list);
+        return "myBooks";
     }
 
     @RequestMapping("/mylist/{id}")
@@ -64,5 +68,11 @@ public class BookController {
         MyBookList myBookList = new MyBookList(book.getId(),book.getName(),book.getAuthor(),book.getPrice());
         myBookListService.saveMyBooks(myBookList);
         return "redirect:/my_books";
+    }
+
+    @RequestMapping("/editBook/{id}")
+    public String editBook()
+    {
+        return "bookEdit";
     }
 }
